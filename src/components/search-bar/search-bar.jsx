@@ -1,22 +1,51 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './search-bar.style.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchWeather } from '../../features/weatherSlice'
+import { AppContext } from '../../context/appContext';
 
-export default function SearchBar(props) {
+export default function SearchBar() {
+    const [inputText, setInputText] = useState('');
+    const error = useSelector((state) => state.weather.error);
+    const { errorText, setErrorText } = useContext(AppContext);
+
+    const dispatch = useDispatch();
+
+    const handleChange = (e) => {
+        setInputText(e.target.value);
+    }
+
+    useEffect(() => {
+        error?.length > 0 ? setErrorText('Enter a valid search name') : setErrorText('');
+    }, [error]);
+
+    const handleKeyDown = async (e) => {
+        if(inputText.length && e.key === 'Enter') {
+            dispatch(fetchWeather(inputText));
+        }
+    }
+
+    const handleClick = () => {
+        inputText.length && dispatch(fetchWeather(inputText));
+    }
+
     return (
-        <div className='search-bar-container mt-8 relative px-4 md:pt-12 md:px-40 lg:px-80'>
+        <div className='search-bar-container'>
             <input 
-                onChange={props.handleChange} 
-                onKeyDown={props.handleKeyDown} 
+                onChange={handleChange} 
+                onKeyDown={handleKeyDown} 
                 placeholder='Search Location' 
-                value={props.inputTextValue}
+                value={inputText} 
             />
-            <div className='icon absolute top-0 right-4 md:top-12 md:right-40 lg:right-80'>
-                <button onClick={props.handleClick}>
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button>
-            </div>
+            <button onClick={handleClick}>
+                <FontAwesomeIcon className='search-icon' icon={faMagnifyingGlass} />
+            </button>
+
+            {errorText.length > 0 && <div className="error-text">
+                <p>{errorText}</p>
+            </div>}
         </div>
     );
 }

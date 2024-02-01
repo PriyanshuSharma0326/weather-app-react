@@ -1,8 +1,10 @@
 import React from 'react';
 import './forecast-box.style.scss';
-import { capitalizeEachWord, formatDate } from '../../lib/utils/utils';
+import { capitalizeEachWord, celsiusToFahrenheit, formatDate } from '../../lib/utils/utils';
 
 function ForecastBox({forecast}) {
+    const celsius = JSON.parse(localStorage.getItem('celsius'));
+
     return (
         <div className='forecast-box-container'>
             <h2 className="forecast-date">
@@ -14,7 +16,7 @@ function ForecastBox({forecast}) {
             </div>
 
             <div className="weather-data">
-                <h2>{parseInt(forecast.temperature)}°<span>C</span></h2>
+                <h2>{celsius ? parseInt(forecast.temperature) : parseInt(celsiusToFahrenheit(forecast.temperature))}°<span>{celsius ? 'C' : 'F'}</span></h2>
 
                 <p>{capitalizeEachWord(forecast.weatherDescription)}</p>
             </div>

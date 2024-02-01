@@ -3,10 +3,11 @@ import './weather-card.style.scss';
 import { faDroplet, faLocationDot, faTemperatureFull, faTemperatureHalf, faWind } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useSelector } from 'react-redux';
-import { capitalizeEachWord } from '../../lib/utils/utils';
+import { capitalizeEachWord, celsiusToFahrenheit } from '../../lib/utils/utils';
 
 function WeatherCard() {
     const weatherData = useSelector((state) => state.weather.weather);
+    const celsius = JSON.parse(localStorage.getItem('celsius'));
 
     return (
         <div className='weather-card-container'>
@@ -21,7 +22,7 @@ function WeatherCard() {
                 </div>
 
                 <div className="temperature">
-                    <h2>{parseInt(weatherData.temperature)}°<span>C</span></h2>
+                    <h2>{celsius ? parseInt(weatherData.temperature) : parseInt(celsiusToFahrenheit(weatherData.temperature))}°<span>{celsius ? 'C' : 'F'}</span></h2>
                 </div>
             </div>
 
@@ -33,11 +34,11 @@ function WeatherCard() {
                 <div className="min-max-temperature">
                     <div className="max">
                         <p><FontAwesomeIcon className='icon' icon={faTemperatureFull} />Max: </p>
-                        <h2>{parseInt(weatherData.maxTemperature)}°<span>C</span></h2>
+                        <h2>{celsius ? parseInt(weatherData.maxTemperature) : parseInt(celsiusToFahrenheit(weatherData.maxTemperature))}°<span>{celsius ? 'C' : 'F'}</span></h2>
                     </div>
                     <div className="min">
                         <p><FontAwesomeIcon className='icon' icon={faTemperatureHalf} />Min: </p>
-                        <h2>{parseInt(weatherData.minTemperature)}°<span>C</span></h2>
+                        <h2>{celsius ? parseInt(weatherData.minTemperature) : parseInt(celsiusToFahrenheit(weatherData.minTemperature))}°<span>{celsius ? 'C' : 'F'}</span></h2>
                     </div>
                 </div>
 

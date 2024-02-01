@@ -64,9 +64,11 @@ function filterUniqueDates(response) {
     }
   
     const filteredObjects = response.filter(item => {
-        const itemDate = new Date(item.dt_txt.split(' ')[0]);
-        const itemDateString = itemDate.toISOString().split('T')[0];
-        return nextFiveDays.includes(itemDateString);
+        const itemDateTime = item.dt_txt.split(' ');
+        const itemDate = itemDateTime[0];
+        const itemTime = itemDateTime[1];
+
+        return nextFiveDays.includes(itemDate) && itemTime === "15:00:00";
     });
 
     const uniqueDatesMap = new Map();
@@ -106,6 +108,10 @@ function getMonthName(monthIndex) {
     return months[monthIndex];
 }
 
+function celsiusToFahrenheit(celsius) {
+    return (celsius * 9/5) + 32;
+}
+
 export {
     getWeatherInformation,
     degreesToDirection,
@@ -113,4 +119,5 @@ export {
     getForecastInformation,
     filterUniqueDates,
     formatDate,
+    celsiusToFahrenheit,
 }

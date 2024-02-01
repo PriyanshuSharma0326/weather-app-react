@@ -12,7 +12,7 @@ function ForecastCard() {
                 {weatherData?.forecast.map((forecast) => {
                     return (
                         <ForecastBox 
-                            key={forecast.dt} 
+                            key={forecast.date} 
                             forecast={forecast}
                         />
                     )

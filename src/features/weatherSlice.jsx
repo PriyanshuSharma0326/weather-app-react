@@ -7,13 +7,12 @@ const initialStateValue = {
     error: null,
 };
 
-const fetchWeather = createAsyncThunk('weather/fetchWeather', async () => {
-    const response = await getWeatherInformation('Delhi');
-    const forecastData = await getForecastInformation('Delhi');
+const fetchWeather = createAsyncThunk('weather/fetchWeather', async (location) => {
+    const response = await getWeatherInformation(location);
+    const forecastData = await getForecastInformation(location);
 
     const forecastResponse = filterUniqueDates(forecastData.list);
 
-    console.log(forecastResponse);
     const forecast = [];
 
     forecastResponse.forEach(item => {
@@ -54,10 +53,12 @@ const weatherSlice = createSlice({
         .addCase(fetchWeather.fulfilled, (state, action) => {
             state.loading = 'succeeded';
             state.weather = action.payload;
+            state.error = null;
         })
         .addCase(fetchWeather.rejected, (state, action) => {
             state.loading = 'failed';
             state.error = action.error.message;
+            state.loading = 'succeeded';
         });
     },
 });
