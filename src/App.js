@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import Main from "./components/main/main";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchWeather } from './features/weatherSlice';
+import LoadingScreen from "./components/loading-screen/loading-screen";
+import FailedScreen from "./components/failed-screen/failed-screen";
+
+export default function App() {
+    const dispatch = useDispatch();
+    const loading = useSelector((state) => state.weather.loading);
+
+    useEffect(() => {
+        dispatch(fetchWeather());
+    }, [dispatch]);
+
+    return (
+        <>
+            {
+                loading !=='succeeded' ? (
+                    loading !== 'failed' ? <LoadingScreen /> : <FailedScreen />
+                ) : 
+                <Main />
+            }
+        </>
+    );
 }
-
-export default App;

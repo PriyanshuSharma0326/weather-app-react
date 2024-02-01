@@ -1,0 +1,16 @@
+.forecast-card-container {
+    width: 35%;
+    min-height: 100%;
+    background: rgb(28,49,155);
+    background: linear-gradient(180deg, rgba(28,49,155,1) 0%, rgba(64,93,230,1) 100%);
+    color: var(--grey-7);
+
+    padding: 1.5rem 1rem;
+    border-radius: 0.5rem;
+
+    .forecast-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+}
