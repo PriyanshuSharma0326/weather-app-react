@@ -5,6 +5,7 @@
 ## Table of Contents
 
 - [About](#about)
+- [Live Demo](#live-demo)
 - [Features](#features)
 - [Project Structure](#project-structure)
 - [Run locally](#run-locally)
@@ -14,6 +15,10 @@
 ## About
 
 A simple and responsive weather application built on React and designed with SASS. Search for weather information for any city in the world, the default being Delhi.
+
+## Live Demo
+
+- [**Live Demo Link**](https://weather-gateway.vercel.app/)
 
 ## Features
 
