@@ -110,6 +110,30 @@ function celsiusToFahrenheit(celsius) {
     return (celsius * 9/5) + 32;
 }
 
+function directionShort(windDirection) {
+    let simplifiedDirection;
+
+    switch (windDirection) {
+        case 'Northeast':
+            simplifiedDirection = 'NE';
+            break;
+        case 'Northwest':
+            simplifiedDirection = 'NW';
+            break;
+        case 'Southeast':
+            simplifiedDirection = 'SE';
+            break;
+        case 'Southwest':
+            simplifiedDirection = 'SW';
+            break;
+        default:
+            simplifiedDirection = windDirection;
+            break;
+    }
+
+    return simplifiedDirection;
+}
+
 export {
     getWeatherInformation,
     degreesToDirection,
@@ -118,4 +142,5 @@ export {
     filterUniqueDates,
     formatDate,
     celsiusToFahrenheit,
+    directionShort,
 }
