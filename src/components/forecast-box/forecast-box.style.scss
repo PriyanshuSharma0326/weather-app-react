@@ -43,4 +43,36 @@
             }
         }
     }
+
+    @media (max-width: 1024px) {
+        .forecast-date {
+            font-size: 0.95rem;
+        }
+
+        .weather-data {
+            h2, p {
+                font-size: 1.15rem;
+    
+                span {
+                    font-size: 1.05rem;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        width: calc(33.3% - 0.66rem);
+
+        &:last-child {
+            margin: unset;
+        }
+    }
+
+    @media (max-width: 426px) {
+        width: calc(50% - 0.5rem);
+
+        &:last-child {
+            margin: 0 auto;
+        }
+    }
 }

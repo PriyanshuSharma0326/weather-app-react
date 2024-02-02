@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './forecast-box.style.scss';
 import { capitalizeEachWord, celsiusToFahrenheit, formatDate } from '../../lib/utils/utils';
+import { AppContext } from '../../context/appContext';
 
 function ForecastBox({forecast}) {
-    const celsius = JSON.parse(localStorage.getItem('celsius'));
+    const { celsius } = useContext(AppContext);
 
     return (
         <div className='forecast-box-container'>

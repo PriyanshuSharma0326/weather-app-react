@@ -8,6 +8,8 @@ function ForecastCard() {
 
     return (
         <div className='forecast-card-container'>
+            <h2 className="forecast-title">5 days Forecast</h2>
+
             <div className="forecast-list">
                 {weatherData?.forecast.map((forecast) => {
                     return (

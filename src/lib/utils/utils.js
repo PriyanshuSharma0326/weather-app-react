@@ -64,11 +64,9 @@ function filterUniqueDates(response) {
     }
   
     const filteredObjects = response.filter(item => {
-        const itemDateTime = item.dt_txt.split(' ');
-        const itemDate = itemDateTime[0];
-        const itemTime = itemDateTime[1];
-
-        return nextFiveDays.includes(itemDate) && itemTime === "15:00:00";
+        const itemDate = new Date(item.dt_txt.split(' ')[0]);
+        const itemDateString = itemDate.toISOString().split('T')[0];
+        return nextFiveDays.includes(itemDateString);
     });
 
     const uniqueDatesMap = new Map();

@@ -22,8 +22,41 @@
         gap: 1rem;
 
         span {
-            font-size: 1.15rrem;
+            font-size: 1.15rem;
             color: var(--white);
+        }
+    }
+
+    @media (max-width: 1024px) {
+        gap: 3.5rem;
+
+        .cards-container {
+            padding: 0 5rem;
+        }
+
+        .toggle {
+            top: 3.75rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .cards-container {
+            flex-direction: column;
+        }
+
+        padding-bottom: 4rem;
+    }
+
+    @media (max-width: 426px) {
+        gap: 1rem;
+        padding-bottom: 0;
+
+        .cards-container {
+            padding: 0;
+        }
+
+        .toggle {
+            display: none;
         }
     }
 }

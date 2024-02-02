@@ -18,13 +18,11 @@ export default function SearchBar() {
     }
 
     useEffect(() => {
-        error?.length > 0 ? setErrorText('Enter a valid search name') : setErrorText('');
+        error?.length > 0 ? setErrorText('Enter a valid city name') : setErrorText('');
     }, [error]);
 
-    const handleKeyDown = async (e) => {
-        if(inputText.length && e.key === 'Enter') {
-            dispatch(fetchWeather(inputText));
-        }
+    const handleKeyDown = (e) => {
+        inputText.length && e.key === 'Enter' && dispatch(fetchWeather(inputText));
     }
 
     const handleClick = () => {

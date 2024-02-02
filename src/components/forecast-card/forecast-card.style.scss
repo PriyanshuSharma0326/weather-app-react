@@ -8,9 +8,32 @@
     padding: 1.5rem 1rem;
     border-radius: 0.5rem;
 
+    .forecast-title {
+        display: none;
+    }
+
     .forecast-list {
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;
+    }
+
+    @media (max-width: 1024px) {
+        width: 47.5%;
+    }
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+
+    @media (max-width: 426px) {
+        border-radius: 0.75rem 0.75rem 0 0;
+
+        .forecast-title {
+            display: flex;
+            font-size: 1.5rem;
+            color: var(--white);
+            padding: 0 0 1.5rem 0.5rem;
+        }
     }
 }

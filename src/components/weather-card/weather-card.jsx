@@ -1,16 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './weather-card.style.scss';
 import { faDroplet, faLocationDot, faTemperatureFull, faTemperatureHalf, faWind } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useSelector } from 'react-redux';
 import { capitalizeEachWord, celsiusToFahrenheit } from '../../lib/utils/utils';
+import { AppContext } from '../../context/appContext';
+import Toggle from 'react-toggle';
 
 function WeatherCard() {
     const weatherData = useSelector((state) => state.weather.weather);
-    const celsius = JSON.parse(localStorage.getItem('celsius'));
+    const { celsius, setCelsius } = useContext(AppContext);
+
+    const toggleCelsius = () => {
+        const newCelsius = !celsius;
+        setCelsius(newCelsius);
+        localStorage.setItem('celsius', JSON.stringify(newCelsius));
+    };
 
     return (
         <div className='weather-card-container'>
+            <label className='toggle'>
+                <span>F</span>
+                <Toggle
+                    defaultChecked={celsius}
+                    icons={false} 
+                    onChange={toggleCelsius}
+                />
+                <span>C</span>
+            </label>
+
             <div className="location">
                 <FontAwesomeIcon icon={faLocationDot} className='icon' />
                 <h2>{weatherData.location}</h2>
